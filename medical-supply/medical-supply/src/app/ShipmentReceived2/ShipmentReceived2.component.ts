@@ -14,16 +14,16 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ShipmentReceivedService } from './ShipmentReceived.service';
+import { ShipmentReceived2Service } from './ShipmentReceived2.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
-  selector: 'app-shipmentreceived',
-  templateUrl: './ShipmentReceived.component.html',
-  styleUrls: ['./ShipmentReceived.component.css'],
-  providers: [ShipmentReceivedService]
+  selector: 'app-shipmentreceived2',
+  templateUrl: './ShipmentReceived2.component.html',
+  styleUrls: ['./ShipmentReceived2.component.css'],
+  providers: [ShipmentReceived2Service]
 })
-export class ShipmentReceivedComponent implements OnInit {
+export class ShipmentReceived2Component implements OnInit {
 
   myForm: FormGroup;
 
@@ -32,16 +32,16 @@ export class ShipmentReceivedComponent implements OnInit {
   private currentId;
   private errorMessage;
 
-  shipment = new FormControl('', Validators.required);
-  //transactionId = new FormControl('', Validators.required);
-  //timestamp = new FormControl('', Validators.required);
+  shipment2 = new FormControl('', Validators.required);
+  transactionId = new FormControl('', Validators.required);
+  timestamp = new FormControl('', Validators.required);
 
 
-  constructor(private serviceShipmentReceived: ShipmentReceivedService, fb: FormBuilder) {
+  constructor(private serviceShipmentReceived2: ShipmentReceived2Service, fb: FormBuilder) {
     this.myForm = fb.group({
-      shipment: this.shipment,
-      //transactionId: this.transactionId,
-      //timestamp: this.timestamp
+      shipment2: this.shipment2,
+      transactionId: this.transactionId,
+      timestamp: this.timestamp
     });
   };
 
@@ -51,7 +51,7 @@ export class ShipmentReceivedComponent implements OnInit {
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.serviceShipmentReceived.getAll()
+    return this.serviceShipmentReceived2.getAll()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
@@ -98,26 +98,26 @@ export class ShipmentReceivedComponent implements OnInit {
 
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.mynetwork.ShipmentReceived',
-      'shipment': this.shipment.value,
-      //'transactionId': this.transactionId.value,
-      //'timestamp': this.timestamp.value
+      $class: 'org.example.mynetwork.ShipmentReceived2',
+      'shipment2': this.shipment2.value,
+      'transactionId': this.transactionId.value,
+      'timestamp': this.timestamp.value
     };
 
     this.myForm.setValue({
-      'shipment': null,
-      //'transactionId': null,
-      //'timestamp': null
+      'shipment2': null,
+      'transactionId': null,
+      'timestamp': null
     });
 
-    return this.serviceShipmentReceived.addTransaction(this.Transaction)
+    return this.serviceShipmentReceived2.addTransaction(this.Transaction)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
-        'shipment': null,
-        //'transactionId': null,
-        //'timestamp': null
+        'shipment2': null,
+        'transactionId': null,
+        'timestamp': null
       });
     })
     .catch((error) => {
@@ -131,12 +131,12 @@ export class ShipmentReceivedComponent implements OnInit {
 
   updateTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.mynetwork.ShipmentReceived',
-      'shipment': this.shipment.value,
-      //'timestamp': this.timestamp.value
+      $class: 'org.example.mynetwork.ShipmentReceived2',
+      'shipment2': this.shipment2.value,
+      'timestamp': this.timestamp.value
     };
 
-    return this.serviceShipmentReceived.updateTransaction(form.get('transactionId').value, this.Transaction)
+    return this.serviceShipmentReceived2.updateTransaction(form.get('transactionId').value, this.Transaction)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -154,7 +154,7 @@ export class ShipmentReceivedComponent implements OnInit {
 
   deleteTransaction(): Promise<any> {
 
-    return this.serviceShipmentReceived.deleteTransaction(this.currentId)
+    return this.serviceShipmentReceived2.deleteTransaction(this.currentId)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -176,32 +176,32 @@ export class ShipmentReceivedComponent implements OnInit {
 
   getForm(id: any): Promise<any> {
 
-    return this.serviceShipmentReceived.getTransaction(id)
+    return this.serviceShipmentReceived2.getTransaction(id)
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
       const formObject = {
-        'shipment': null,
-        //'transactionId': null,
-        //'timestamp': null
+        'shipment2': null,
+        'transactionId': null,
+        'timestamp': null
       };
 
-      if (result.shipment) {
-        formObject.shipment = result.shipment;
+      if (result.shipment2) {
+        formObject.shipment2 = result.shipment2;
       } else {
-        formObject.shipment = null;
+        formObject.shipment2 = null;
       }
 
       if (result.transactionId) {
-       // formObject.transactionId = result.transactionId;
+        formObject.transactionId = result.transactionId;
       } else {
-        //formObject.transactionId = null;
+        formObject.transactionId = null;
       }
 
       if (result.timestamp) {
-        //formObject.timestamp = result.timestamp;
+        formObject.timestamp = result.timestamp;
       } else {
-        //formObject.timestamp = null;
+        formObject.timestamp = null;
       }
 
       this.myForm.setValue(formObject);
@@ -220,9 +220,9 @@ export class ShipmentReceivedComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
-      'shipment': null,
-      //'transactionId': null,
-     // 'timestamp': null
+      'shipment2': null,
+      'transactionId': null,
+      'timestamp': null
     });
   }
 }

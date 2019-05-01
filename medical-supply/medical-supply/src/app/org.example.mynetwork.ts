@@ -8,15 +8,9 @@ import {Event} from './org.hyperledger.composer.system';
       IN_TRANSIT,
       ARRIVED,
    }
-   export class Address {
-      city: string;
-      country: string;
-      street: string;
-      zip: string;
-   }
    export abstract class Business extends Participant {
       email: string;
-      address: Address;
+      address: string;
       accountBalance: number;
    }
    export class Supplier extends Business {
@@ -25,11 +19,21 @@ import {Event} from './org.hyperledger.composer.system';
    }
    export class Manufacturer extends Business {
    }
+   export class Distributor extends Business {
+   }
    export class Contract extends Asset {
       contractId: string;
       supplier: Supplier;
       shipper: Shipper;
       manufacturer: Manufacturer;
+      arrivalDateTime: Date;
+      unitPrice: number;
+   }
+   export class Contract2 extends Asset {
+      contractId: string;
+      manufacturer: Manufacturer;
+      shipper: Shipper;
+      distributor: Distributor;
       arrivalDateTime: Date;
       unitPrice: number;
    }
@@ -40,13 +44,28 @@ import {Event} from './org.hyperledger.composer.system';
       unitCount: number;
       contract: Contract;
    }
+   export class Shipment2 extends Asset {
+      shipmentId: string;
+      resource: string;
+      status: ShipmentStatus;
+      unitCount: number;
+      contract2: Contract2;
+   }
    export abstract class ShipmentTransaction extends Transaction {
       shipment: Shipment;
+   }
+   export abstract class ShipmentTransaction2 extends Transaction {
+      shipment2: Shipment2;
    }
    export class ShipmentHasArrived extends Event {
       shipment: Shipment;
    }
+   export class ShipmentHasArrived2 extends Event {
+      shipment2: Shipment2;
+   }
    export class ShipmentReceived extends ShipmentTransaction {
+   }
+   export class ShipmentReceived2 extends ShipmentTransaction2 {
    }
    export class SetupDemo extends Transaction {
    }

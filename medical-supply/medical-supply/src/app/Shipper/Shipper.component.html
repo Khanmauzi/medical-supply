@@ -39,7 +39,7 @@
                 <div class="form-group text-left">
                   <label for="address">address</label>
                   
-                      <textarea formControlName="address" class="form-control" rows="3"></textarea>
+                    <input formControlName="address" type="text" class="form-control">
                   
                 </div>
               
@@ -94,9 +94,7 @@
                 <label for="address">address</label>
   
                 
-                  
-                    <textarea [ngModel]="address" formControlName="address" class="form-control" rows="3"></textarea>
-                  
+                  <input [ngModel]="address"formControlName="address" type="text" class="form-control">
                 
   
               </div>

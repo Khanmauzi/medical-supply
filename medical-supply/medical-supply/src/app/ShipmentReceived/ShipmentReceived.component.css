@@ -19,7 +19,7 @@
 }
 
 .btn-primary {
-    background: #844AE4;
+    background: rgb(6, 74, 182);
     border-radius: 4px;
     border: 0px;
     font-size: 14px;
@@ -89,17 +89,17 @@ label {
 
 }
 .btn-default {
-    color: #844EF4;
+    color: rgb(6, 74, 182);
     background-color: #ffffff;
-    border-color: #844EF4;
+    border-color: rgb(6, 74, 182);
     border-radius: 4px;
     width: 76px;
     height: 40px;
 }
 .btn-danger{
     color: #ffffff;
-    background-color: #844AE4;
-    border-color: #844AE4;
+    background-color: rgb(6, 74, 182);
+    border-color: rgb(6, 74, 182);
     border-radius: 4px;
     width: 76px;
     height: 40px;

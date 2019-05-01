@@ -14,34 +14,34 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ShipmentReceivedService } from './ShipmentReceived.service';
+import { DistributorService } from './Distributor.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
-  selector: 'app-shipmentreceived',
-  templateUrl: './ShipmentReceived.component.html',
-  styleUrls: ['./ShipmentReceived.component.css'],
-  providers: [ShipmentReceivedService]
+  selector: 'app-distributor',
+  templateUrl: './Distributor.component.html',
+  styleUrls: ['./Distributor.component.css'],
+  providers: [DistributorService]
 })
-export class ShipmentReceivedComponent implements OnInit {
+export class DistributorComponent implements OnInit {
 
   myForm: FormGroup;
 
-  private allTransactions;
-  private Transaction;
+  private allParticipants;
+  private participant;
   private currentId;
   private errorMessage;
 
-  shipment = new FormControl('', Validators.required);
-  //transactionId = new FormControl('', Validators.required);
-  //timestamp = new FormControl('', Validators.required);
+  email = new FormControl('', Validators.required);
+  address = new FormControl('', Validators.required);
+  accountBalance = new FormControl('', Validators.required);
 
 
-  constructor(private serviceShipmentReceived: ShipmentReceivedService, fb: FormBuilder) {
+  constructor(public serviceDistributor: DistributorService, fb: FormBuilder) {
     this.myForm = fb.group({
-      shipment: this.shipment,
-      //transactionId: this.transactionId,
-      //timestamp: this.timestamp
+      email: this.email,
+      address: this.address,
+      accountBalance: this.accountBalance
     });
   };
 
@@ -51,21 +51,20 @@ export class ShipmentReceivedComponent implements OnInit {
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.serviceShipmentReceived.getAll()
+    return this.serviceDistributor.getAll()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
-      result.forEach(transaction => {
-        tempList.push(transaction);
+      result.forEach(participant => {
+        tempList.push(participant);
       });
-      this.allTransactions = tempList;
+      this.allParticipants = tempList;
     })
     .catch((error) => {
       if (error === 'Server error') {
         this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
       } else if (error === '404 - Not Found') {
         this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
-      } else {
         this.errorMessage = error;
       }
     });
@@ -73,7 +72,7 @@ export class ShipmentReceivedComponent implements OnInit {
 
 	/**
    * Event handler for changing the checked state of a checkbox (handles array enumeration values)
-   * @param {String} name - the name of the transaction field to update
+   * @param {String} name - the name of the participant field to update
    * @param {any} value - the enumeration value for which to toggle the checked state
    */
   changeArrayValue(name: string, value: any): void {
@@ -87,38 +86,39 @@ export class ShipmentReceivedComponent implements OnInit {
 
 	/**
 	 * Checkbox helper, determining whether an enumeration value should be selected or not (for array enumeration values
-   * only). This is used for checkboxes in the transaction updateDialog.
-   * @param {String} name - the name of the transaction field to check
+   * only). This is used for checkboxes in the participant updateDialog.
+   * @param {String} name - the name of the participant field to check
    * @param {any} value - the enumeration value to check for
-   * @return {Boolean} whether the specified transaction field contains the provided value
+   * @return {Boolean} whether the specified participant field contains the provided value
    */
   hasArrayValue(name: string, value: any): boolean {
     return this[name].value.indexOf(value) !== -1;
   }
 
-  addTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'org.example.mynetwork.ShipmentReceived',
-      'shipment': this.shipment.value,
-      //'transactionId': this.transactionId.value,
-      //'timestamp': this.timestamp.value
+  addParticipant(form: any): Promise<any> {
+    this.participant = {
+      $class: 'org.example.mynetwork.Distributor',
+      'email': this.email.value,
+      'address': this.address.value,
+      'accountBalance': this.accountBalance.value
     };
 
     this.myForm.setValue({
-      'shipment': null,
-      //'transactionId': null,
-      //'timestamp': null
+      'email': null,
+      'address': null,
+      'accountBalance': null
     });
 
-    return this.serviceShipmentReceived.addTransaction(this.Transaction)
+    return this.serviceDistributor.addParticipant(this.participant)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
-        'shipment': null,
-        //'transactionId': null,
-        //'timestamp': null
+        'email': null,
+        'address': null,
+        'accountBalance': null
       });
+      this.loadAll(); 
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -129,35 +129,39 @@ export class ShipmentReceivedComponent implements OnInit {
     });
   }
 
-  updateTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'org.example.mynetwork.ShipmentReceived',
-      'shipment': this.shipment.value,
-      //'timestamp': this.timestamp.value
+
+   updateParticipant(form: any): Promise<any> {
+    this.participant = {
+      $class: 'org.example.mynetwork.Distributor',
+      'address': this.address.value,
+      'accountBalance': this.accountBalance.value
     };
 
-    return this.serviceShipmentReceived.updateTransaction(form.get('transactionId').value, this.Transaction)
+    return this.serviceDistributor.updateParticipant(form.get('email').value, this.participant)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
+      this.loadAll();
     })
     .catch((error) => {
       if (error === 'Server error') {
         this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
       } else if (error === '404 - Not Found') {
-      this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+        this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
       } else {
         this.errorMessage = error;
       }
     });
   }
 
-  deleteTransaction(): Promise<any> {
 
-    return this.serviceShipmentReceived.deleteTransaction(this.currentId)
+  deleteParticipant(): Promise<any> {
+
+    return this.serviceDistributor.deleteParticipant(this.currentId)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
+      this.loadAll();
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -176,53 +180,53 @@ export class ShipmentReceivedComponent implements OnInit {
 
   getForm(id: any): Promise<any> {
 
-    return this.serviceShipmentReceived.getTransaction(id)
+    return this.serviceDistributor.getparticipant(id)
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
       const formObject = {
-        'shipment': null,
-        //'transactionId': null,
-        //'timestamp': null
+        'email': null,
+        'address': null,
+        'accountBalance': null
       };
 
-      if (result.shipment) {
-        formObject.shipment = result.shipment;
+      if (result.email) {
+        formObject.email = result.email;
       } else {
-        formObject.shipment = null;
+        formObject.email = null;
       }
 
-      if (result.transactionId) {
-       // formObject.transactionId = result.transactionId;
+      if (result.address) {
+        formObject.address = result.address;
       } else {
-        //formObject.transactionId = null;
+        formObject.address = null;
       }
 
-      if (result.timestamp) {
-        //formObject.timestamp = result.timestamp;
+      if (result.accountBalance) {
+        formObject.accountBalance = result.accountBalance;
       } else {
-        //formObject.timestamp = null;
+        formObject.accountBalance = null;
       }
 
       this.myForm.setValue(formObject);
-
     })
     .catch((error) => {
       if (error === 'Server error') {
         this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
       } else if (error === '404 - Not Found') {
-      this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+        this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
       } else {
         this.errorMessage = error;
       }
     });
+
   }
 
   resetForm(): void {
     this.myForm.setValue({
-      'shipment': null,
-      //'transactionId': null,
-     // 'timestamp': null
+      'email': null,
+      'address': null,
+      'accountBalance': null
     });
   }
 }

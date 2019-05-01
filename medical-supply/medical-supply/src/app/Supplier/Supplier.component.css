@@ -11,14 +11,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-.container {
+ .container {
     width: 100%;
     padding-left: 72px;
     padding-right: 72px;
 }
 
 .btn-primary {
-    background: #844AE4;
+    background: rgb(6, 74, 182);;
     border-radius: 4px;
     border: 0px;
     font-size: 14px;
@@ -26,7 +26,7 @@
     letter-spacing: 0;
     line-height: 10px;
     height: 40px;
-    width: 163px;
+    width: 153px;
     float: right;
     margin-top: 5%;
 }
@@ -88,43 +88,43 @@ label {
 
 }
 .btn-default {
-    color: #844EF4;
+    color:  rgb(6, 74, 182);;
     background-color: #ffffff;
-    border-color: #844EF4;
+    border-color: rgb(6, 74, 182);;
     border-radius: 4px;
     width: 76px;
     height: 40px;
 }
 .btn-danger{
     color: #ffffff;
-    background-color: #844AE4;
-    border-color: #844AE4;
+    background-color:  rgb(6, 74, 182);;
+    border-color:  rgb(6, 74, 182);;
     border-radius: 4px;
     width: 76px;
     height: 40px;
 }
 .btn-danger:focus{
-    background-color: #4D21A8;
-    border-color: #4D21A8;
+    background-color: rgb(6, 74, 182);;
+    border-color: rgb(6, 74, 182);;
 }
 .btn-success {
     color: #ffffff;
-    background-color: #844AE4;
-    border-color: #844AE4;
+    background-color:  rgb(6, 74, 182);;
+    border-color:  rgb(6, 74, 182);;
     border-radius: 4px;
     width: 76px;
     height: 40px;
 }
 .btn-success:focus{
-    background-color: #4D21A8;
-    border-color: #4D21A8;
+    background-color:  rgb(6, 74, 182);
+    border-color: rgb(6, 74, 182);;
 }
 .btn-default:focus{
     background-color: #fff;
-    border-color: #4d21a8;  
-    color: #4d21a8;      
+    border-color:  rgb(6, 74, 182);;  
+    color:  rgb(6, 74, 182);;      
 }
-.participant-title{
+.asset-title{
     font-family: inherit;
     font-size: 24px;
     color: #4E4E4E;
@@ -146,7 +146,7 @@ label {
     line-height: 24px;
     padding-left: 24px;
 }
-.participant-properties{
+.asset-properties{
     font-family: inherit;
     font-size: 14px;
     color: #848484;
@@ -161,7 +161,7 @@ label {
     fill: currentColor;
 }
 
-/***.participant-properties:hover, .participant-properties:hover span{  
+/***.asset-properties:hover, .asset-properties:hover span{  
 overflow: visible;
 position: relative;
  make readable design 

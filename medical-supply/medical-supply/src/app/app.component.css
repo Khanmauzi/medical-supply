@@ -19,7 +19,7 @@
 
 .navbar {
     border-radius: 0px;
-    background: #F3F3F3;
+    background: rgb(6, 74, 182);
     border: none;
 }
 
@@ -29,12 +29,13 @@
 }
 
 .navbar-brand {
+    text-align: center;
     height: 100%;
     font-size: 32px;
     letter-spacing: 0.28px;
     padding: 0px;
     margin-left: 0px !important;
-    color: #000;
+    color: white;
 }
 
 .navbar-brand:hover {
@@ -70,7 +71,7 @@
 }
 
 .navbar-nav > li > .active:hover > a {
-    color: #6C4CC4 !important;
+    color: rgb(6, 74, 182)!important;
 }
 
 .navbar-nav > li:hover > a {
@@ -79,7 +80,7 @@
 
 .navbar-nav .active > a {
     background-color: #fff;
-    color: #6C4CC4 !important;
+    color: rgb(6, 74, 182) !important;
 }
 
 .dropdown-menu {

@@ -31,17 +31,18 @@ enum ShipmentStatus {
 /**
  * A concept for a simple street address
  */
+ /*
 concept Address {
   o String city optional
   o String country
   o String street optional
   o String zip optional
 }
-
+*/
 
 abstract participant Business identified by email {
   o String email
-  o Address address
+  o String address
   o Double accountBalance
 }
 
@@ -49,6 +50,7 @@ abstract participant Business identified by email {
  * A Supplier is a type of participant in the network
  */
 participant Supplier extends Business {
+
 }
 
 /**
@@ -64,6 +66,12 @@ participant Shipper extends Business {
 participant Manufacturer extends Business {
 }
 
+/**
+* A distributor is a type of participant in the network
+*/
+
+participant Distributor extends Business {
+}
 
 /**
  * Defines a contract between a Supplier and Manufacturer to ship using
@@ -74,6 +82,16 @@ asset Contract identified by contractId {
   --> Supplier supplier
   --> Shipper shipper
   --> Manufacturer manufacturer
+  o DateTime arrivalDateTime
+  o Double unitPrice
+}
+  
+
+asset Contract2 identified by contractId {
+  o String contractId
+  --> Manufacturer manufacturer
+  --> Shipper shipper
+  --> Distributor distributor
   o DateTime arrivalDateTime
   o Double unitPrice
 }
@@ -89,15 +107,30 @@ asset Shipment identified by shipmentId {
   --> Contract contract
 }
 
+  asset Shipment2 identified by shipmentId {
+  o String shipmentId
+  o String resource
+  o ShipmentStatus status
+  o Long unitCount
+  --> Contract2 contract2
+}
 /**
  * An abstract transaction that is related to a Shipment
  */
-abstract transaction ShipmentTransaction {
+abstract transaction ShipmentTransaction  {
     --> Shipment shipment
 }
 
+abstract transaction ShipmentTransaction2 {
+    --> Shipment2 shipment2
+}
+  
 event ShipmentHasArrived {
   --> Shipment shipment
+}
+
+event ShipmentHasArrived2 {
+  --> Shipment2 shipment2
 }
 /**
  * A notification that a shipment has been received by the
@@ -107,6 +140,8 @@ event ShipmentHasArrived {
 transaction ShipmentReceived extends ShipmentTransaction {
 }
 
+transaction ShipmentReceived2 extends ShipmentTransaction2 {
+}
 /**
  * JUST FOR INITIALIZING A DEMO
  */

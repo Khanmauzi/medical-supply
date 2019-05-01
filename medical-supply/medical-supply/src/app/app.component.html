@@ -14,8 +14,8 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <p class="network-name">medical-supply@0.0.1.bna</p>
-        <p class="navbar-brand">medical-supply</p>
+        <!---<p class="network-name">medical-supply@0.0.1.bna</p>-->
+        <p class="navbar-brand">Medical-supply-Chain</p>
       </div>
       <ul class="nav navbar-nav">
         <li class="dropdown active">
@@ -24,7 +24,11 @@
               
               <li><a [routerLink]="['/Contract']">Contract</a></li>
               
+              <li><a [routerLink]="['/Contract2']">Contract2</a></li>
+              
               <li><a [routerLink]="['/Shipment']">Shipment</a></li>
+              
+              <li><a [routerLink]="['/Shipment2']">Shipment2</a></li>
               
             </ul>
         </li>
@@ -38,6 +42,8 @@
             
             <li><a [routerLink]="['/Manufacturer']">Manufacturer</a></li>
             
+            <li><a [routerLink]="['/Distributor']">Distributor</a></li>
+            
           </ul>
       </li>
       <li class="dropdown active">
@@ -46,9 +52,17 @@
           
           <li><a [routerLink]="['/ShipmentReceived']">ShipmentReceived</a></li>
           
+          <li><a [routerLink]="['/ShipmentReceived2']">ShipmentReceived2</a></li>
+          
           <li><a [routerLink]="['/SetupDemo']">SetupDemo</a></li>
           
         </ul>
+    </li>
+    <li class="dropdown active">
+      <a class="dropdown-toggle" data-toggle="dropdown">All Transactions</a>
+      <ul class="dropdown-menu scrollable-menu">
+      <li><a [routerLink]="['/AllTransactions']">AllTransactions</a></li>
+      </ul>
     </li>
       </ul>
     </div>

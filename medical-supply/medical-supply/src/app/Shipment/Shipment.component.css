@@ -11,14 +11,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-.container {
+ .container {
     width: 100%;
     padding-left: 72px;
     padding-right: 72px;
 }
 
 .btn-primary {
-    background: #844AE4;
+    background: rgb(6, 74, 182);;
     border-radius: 4px;
     border: 0px;
     font-size: 14px;
@@ -88,41 +88,41 @@ label {
 
 }
 .btn-default {
-    color: #844EF4;
+    color:  rgb(6, 74, 182);;
     background-color: #ffffff;
-    border-color: #844EF4;
+    border-color: rgb(6, 74, 182);;
     border-radius: 4px;
     width: 76px;
     height: 40px;
 }
 .btn-danger{
     color: #ffffff;
-    background-color: #844AE4;
-    border-color: #844AE4;
+    background-color:  rgb(6, 74, 182);;
+    border-color:  rgb(6, 74, 182);;
     border-radius: 4px;
     width: 76px;
     height: 40px;
 }
 .btn-danger:focus{
-    background-color: #4D21A8;
-    border-color: #4D21A8;
+    background-color: rgb(6, 74, 182);;
+    border-color: rgb(6, 74, 182);;
 }
 .btn-success {
     color: #ffffff;
-    background-color: #844AE4;
-    border-color: #844AE4;
+    background-color:  rgb(6, 74, 182);;
+    border-color:  rgb(6, 74, 182);;
     border-radius: 4px;
     width: 76px;
     height: 40px;
 }
 .btn-success:focus{
-    background-color: #4D21A8;
-    border-color: #4D21A8;
+    background-color:  rgb(6, 74, 182);
+    border-color: rgb(6, 74, 182);;
 }
 .btn-default:focus{
     background-color: #fff;
-    border-color: #4d21a8;  
-    color: #4d21a8;      
+    border-color:  rgb(6, 74, 182);;  
+    color:  rgb(6, 74, 182);;      
 }
 .asset-title{
     font-family: inherit;

@@ -1,0 +1,13 @@
+To restart the REST server using the same options, issue the following command:
+   composer-rest-server -c admin@medical-supply -n never -u true -d Y -w true
+
+
+
+
+   ---------------------------------------------------------------------------------
+
+   To start the network
+
+   1.composer network install --card PeerAdmin@hlfv1 --archiveFile medical-supply@0.0.1.bna
+
+   2.composer network start --networkName medical-supply --networkVersion 0.0.1 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card

@@ -70,6 +70,24 @@ describe('Starting tests for medical-supply', function() {
       });
     });
   
+    it('Contract2 component should be loadable',() => {
+      page.navigateTo('/Contract2');
+      browser.findElement(by.id('assetName'))
+      .then((assetName) => {
+        return assetName.getText();
+      })
+      .then((txt) => {
+        expect(txt).toBe('Contract2');
+      });
+    });
+
+    it('Contract2 table should have 7 columns',() => {
+      page.navigateTo('/Contract2');
+      element.all(by.css('.thead-cols th')).then(function(arr) {
+        expect(arr.length).toEqual(7); // Addition of 1 for 'Action' column
+      });
+    });
+  
     it('Shipment component should be loadable',() => {
       page.navigateTo('/Shipment');
       browser.findElement(by.id('assetName'))
@@ -83,6 +101,24 @@ describe('Starting tests for medical-supply', function() {
 
     it('Shipment table should have 6 columns',() => {
       page.navigateTo('/Shipment');
+      element.all(by.css('.thead-cols th')).then(function(arr) {
+        expect(arr.length).toEqual(6); // Addition of 1 for 'Action' column
+      });
+    });
+  
+    it('Shipment2 component should be loadable',() => {
+      page.navigateTo('/Shipment2');
+      browser.findElement(by.id('assetName'))
+      .then((assetName) => {
+        return assetName.getText();
+      })
+      .then((txt) => {
+        expect(txt).toBe('Shipment2');
+      });
+    });
+
+    it('Shipment2 table should have 6 columns',() => {
+      page.navigateTo('/Shipment2');
       element.all(by.css('.thead-cols th')).then(function(arr) {
         expect(arr.length).toEqual(6); // Addition of 1 for 'Action' column
       });
@@ -144,6 +180,24 @@ describe('Starting tests for medical-supply', function() {
       });
     });
   
+    it('Distributor component should be loadable',() => {
+      page.navigateTo('/Distributor');
+      browser.findElement(by.id('participantName'))
+      .then((participantName) => {
+        return participantName.getText();
+      })
+      .then((txt) => {
+        expect(txt).toBe('Distributor');
+      });
+    });
+
+    it('Distributor table should have 4 columns',() => {
+      page.navigateTo('/Distributor');
+      element.all(by.css('.thead-cols th')).then(function(arr) {
+        expect(arr.length).toEqual(4); // Addition of 1 for 'Action' column
+      });
+    });
+  
 
   
     it('ShipmentReceived component should be loadable',() => {
@@ -154,6 +208,17 @@ describe('Starting tests for medical-supply', function() {
       })
       .then((txt) => {
         expect(txt).toBe('ShipmentReceived');
+      });
+    });
+  
+    it('ShipmentReceived2 component should be loadable',() => {
+      page.navigateTo('/ShipmentReceived2');
+      browser.findElement(by.id('transactionName'))
+      .then((transactionName) => {
+        return transactionName.getText();
+      })
+      .then((txt) => {
+        expect(txt).toBe('ShipmentReceived2');
       });
     });
   
