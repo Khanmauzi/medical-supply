@@ -33,15 +33,15 @@ export class ShipmentReceived2Component implements OnInit {
   private errorMessage;
 
   shipment2 = new FormControl('', Validators.required);
-  transactionId = new FormControl('', Validators.required);
-  timestamp = new FormControl('', Validators.required);
+ // transactionId = new FormControl('', Validators.required);
+ // timestamp = new FormControl('', Validators.required);
 
 
   constructor(private serviceShipmentReceived2: ShipmentReceived2Service, fb: FormBuilder) {
     this.myForm = fb.group({
       shipment2: this.shipment2,
-      transactionId: this.transactionId,
-      timestamp: this.timestamp
+     // transactionId: this.transactionId,
+     // timestamp: this.timestamp
     });
   };
 
@@ -100,14 +100,14 @@ export class ShipmentReceived2Component implements OnInit {
     this.Transaction = {
       $class: 'org.example.mynetwork.ShipmentReceived2',
       'shipment2': this.shipment2.value,
-      'transactionId': this.transactionId.value,
-      'timestamp': this.timestamp.value
+      //'transactionId': this.transactionId.value,
+      //'timestamp': this.timestamp.value
     };
 
     this.myForm.setValue({
-      'shipment2': null,
-      'transactionId': null,
-      'timestamp': null
+      'shipment2': null
+      //'transactionId': null,
+      //'timestamp': null
     });
 
     return this.serviceShipmentReceived2.addTransaction(this.Transaction)
@@ -116,8 +116,8 @@ export class ShipmentReceived2Component implements OnInit {
       this.errorMessage = null;
       this.myForm.setValue({
         'shipment2': null,
-        'transactionId': null,
-        'timestamp': null
+        //'transactionId': null,
+        // 'timestamp': null
       });
     })
     .catch((error) => {
@@ -132,8 +132,8 @@ export class ShipmentReceived2Component implements OnInit {
   updateTransaction(form: any): Promise<any> {
     this.Transaction = {
       $class: 'org.example.mynetwork.ShipmentReceived2',
-      'shipment2': this.shipment2.value,
-      'timestamp': this.timestamp.value
+      //'shipment2': this.shipment2.value,
+      //'timestamp': this.timestamp.value
     };
 
     return this.serviceShipmentReceived2.updateTransaction(form.get('transactionId').value, this.Transaction)
@@ -182,8 +182,8 @@ export class ShipmentReceived2Component implements OnInit {
       this.errorMessage = null;
       const formObject = {
         'shipment2': null,
-        'transactionId': null,
-        'timestamp': null
+       // 'transactionId': null,
+       // 'timestamp': null
       };
 
       if (result.shipment2) {
@@ -193,15 +193,15 @@ export class ShipmentReceived2Component implements OnInit {
       }
 
       if (result.transactionId) {
-        formObject.transactionId = result.transactionId;
+        //formObject.transactionId = result.transactionId;
       } else {
-        formObject.transactionId = null;
+        //formObject.transactionId = null;
       }
 
       if (result.timestamp) {
-        formObject.timestamp = result.timestamp;
+        //formObject.timestamp = result.timestamp;
       } else {
-        formObject.timestamp = null;
+       // formObject.timestamp = null;
       }
 
       this.myForm.setValue(formObject);
@@ -221,8 +221,8 @@ export class ShipmentReceived2Component implements OnInit {
   resetForm(): void {
     this.myForm.setValue({
       'shipment2': null,
-      'transactionId': null,
-      'timestamp': null
+      //'transactionId': null,
+      //'timestamp': null
     });
   }
 }
