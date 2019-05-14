@@ -1,9 +1,7 @@
 
 
 'use strict';
-/**
- * Write your transction processor functions here
- */
+
 
 /**
  *A shipment has been received by an importer
@@ -21,44 +19,6 @@ function payOut(shipmentReceived) {
 
     // set the status of the shipment
     shipment.status = 'ARRIVED';
-
-    // if the shipment did not arrive on time the payout is zero
-   /* if (shipmentReceived.timestamp > contract.arrivalDateTime) {
-        payOut = 0;
-        console.log('Late shipment');
-    } else {
-        // find the lowest temperature reading
-        if (shipment.temperatureReadings) {
-            // sort the temperatureReadings by centigrade
-            shipment.temperatureReadings.sort(function (a, b) {
-                return (a.centigrade - b.centigrade);
-            });
-            var lowestReading = shipment.temperatureReadings[0];
-            var highestReading = shipment.temperatureReadings[shipment.temperatureReadings.length - 1];
-            var penalty = 0;
-            console.log('Lowest temp reading: ' + lowestReading.centigrade);
-            console.log('Highest temp reading: ' + highestReading.centigrade);
-
-            // does the lowest temperature violate the contract?
-            if (lowestReading.centigrade < contract.minTemperature) {
-                penalty += (contract.minTemperature - lowestReading.centigrade) * contract.minPenaltyFactor;
-                console.log('Min temp penalty: ' + penalty);
-            }
-
-            // does the highest temperature violate the contract?
-            if (highestReading.centigrade > contract.maxTemperature) {
-                penalty += (highestReading.centigrade - contract.maxTemperature) * contract.maxPenaltyFactor;
-                console.log('Max temp penalty: ' + penalty);
-            }
-
-            // apply any penalities
-            payOut -= (penalty * shipment.unitCount);
-
-            if (payOut < 0) {
-                payOut = 0;
-            }
-        }
-    }*/
 
     console.log('Payout: ' + payOut);
     contract.supplier.accountBalance += payOut;
@@ -108,44 +68,6 @@ function payOut2(shipmentReceived2) {
 
     // set the status of the shipment
     shipment2.status = 'ARRIVED';
-
-    // if the shipment did not arrive on time the payout is zero
-   /* if (shipmentReceived.timestamp > contract.arrivalDateTime) {
-        payOut = 0;
-        console.log('Late shipment');
-    } else {
-        // find the lowest temperature reading
-        if (shipment.temperatureReadings) {
-            // sort the temperatureReadings by centigrade
-            shipment.temperatureReadings.sort(function (a, b) {
-                return (a.centigrade - b.centigrade);
-            });
-            var lowestReading = shipment.temperatureReadings[0];
-            var highestReading = shipment.temperatureReadings[shipment.temperatureReadings.length - 1];
-            var penalty = 0;
-            console.log('Lowest temp reading: ' + lowestReading.centigrade);
-            console.log('Highest temp reading: ' + highestReading.centigrade);
-
-            // does the lowest temperature violate the contract?
-            if (lowestReading.centigrade < contract.minTemperature) {
-                penalty += (contract.minTemperature - lowestReading.centigrade) * contract.minPenaltyFactor;
-                console.log('Min temp penalty: ' + penalty);
-            }
-
-            // does the highest temperature violate the contract?
-            if (highestReading.centigrade > contract.maxTemperature) {
-                penalty += (highestReading.centigrade - contract.maxTemperature) * contract.maxPenaltyFactor;
-                console.log('Max temp penalty: ' + penalty);
-            }
-
-            // apply any penalities
-            payOut -= (penalty * shipment.unitCount);
-
-            if (payOut < 0) {
-                payOut = 0;
-            }
-        }
-    }*/
 
     console.log('Payout: ' + payOut2);
     contract2.manufacturer.accountBalance += payOut2;

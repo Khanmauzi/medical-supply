@@ -3,26 +3,14 @@
 namespace org.example.mynetwork
 
 
-/**
- * The status of a shipment
- */
+
+// The status of a shipment
+ 
 enum ShipmentStatus {
   o CREATED
   o IN_TRANSIT
   o ARRIVED
 }
-
-/**
- * A concept for a simple street address
- */
- /*
-concept Address {
-  o String city optional
-  o String country
-  o String street optional
-  o String zip optional
-}
-*/
 
 abstract participant Business identified by email {
   o String email
@@ -30,37 +18,32 @@ abstract participant Business identified by email {
   o Double accountBalance
 }
 
-/**
- * A Supplier is a type of participant in the network
- */
+// A Supplier is a type of participant in the network
+
 participant Supplier extends Business {
 
 }
 
-/**
- * A Shipper is a type of participant in the network
- */
+// A Shipper is a type of participant in the network
+
 participant Shipper extends Business {
 }
 
 
-/**
- * An Manfacturer is a type of participant in the network
- */
+//An Manfacturer is a type of participant in the network
+
 participant Manufacturer extends Business {
 }
 
-/**
-* A distributor is a type of participant in the network
-*/
+// A distributor is a type of participant in the network
+
 
 participant Distributor extends Business {
 }
 
-/**
- * Defines a contract between a Supplier and Manufacturer to ship using
- * a Shipper, paying a set unit price.
- */
+
+ // Defines a contract between a Supplier and Manufacturer to ship using
+ // a Shipper, paying a set unit price.
 asset Contract identified by contractId {
   o String contractId
   --> Supplier supplier
@@ -80,9 +63,7 @@ asset Contract2 identified by contractId {
   o Double unitPrice
 }
 
-/**
- * A shipment being tracked as an asset on the ledger
- */
+// A shipment being tracked as an asset on the ledger
 asset Shipment identified by shipmentId {
   o String shipmentId
   o String resource
@@ -98,9 +79,9 @@ asset Shipment identified by shipmentId {
   o Long unitCount
   --> Contract2 contract2
 }
-/**
- * An abstract transaction that is related to a Shipment
- */
+
+ //An abstract transaction that is related to a Shipment
+ 
 abstract transaction ShipmentTransaction  {
     --> Shipment shipment
 }
@@ -126,11 +107,7 @@ transaction ShipmentReceived extends ShipmentTransaction {
 
 transaction ShipmentReceived2 extends ShipmentTransaction2 {
 }
-/**
- * JUST FOR INITIALIZING A DEMO
- */
-transaction SetupDemo {
-}
+
 
 
 
