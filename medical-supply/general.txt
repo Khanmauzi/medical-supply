@@ -2,12 +2,60 @@ To restart the REST server using the same options, issue the following command:
    composer-rest-server -c admin@medical-supply -n never -u true -d Y -w true
 
 
-
-
-   ---------------------------------------------------------------------------------
+-----------------------------------------------------
+  export FABRIC_VERSION=hlfv11
+    ./startFabric.sh
+    ./createPeerAdminCard.sh
+---------------------------------------------------------------------------------
 
    To start the network
 
    1.composer network install --card PeerAdmin@hlfv1 --archiveFile medical-supply@0.0.1.bna
 
    2.composer network start --networkName medical-supply --networkVersion 0.0.1 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card
+
+   3. composer network ping --card admin@medical-supply
+
+   4.composer-rest-server
+
+---------------------------------------------------------------------------------------------
+
+    docker kill $(docker ps -q)
+    docker rm $(docker ps -aq)
+    docker rmi $(docker images dev-* -q)
+
+
+---------------------------------------------------------------------------------------------
+
+
+issue identity
+composer identity issue -c admin@medical-supply -f mauzi.card -u mauzi -a "resource:org.example.mynetwork.Supplier#mauzi@gmail.com"
+
+now import the card 
+composer card import --file networkadmin.card
+
+
+ping the card
+composer network ping -c cardname
+
+
+
+to list all the identity on the card.
+composer identity list -c cardname
+
+to list all the asset and the contract
+composer network list -c cardname
+
+
+-------------------------------------------------------------------------------------
+to enable oauth authorization
+
+export COMPOSER_PROVIDERS='{"github":{"provider":"github","module":"passport-github","clientID":"f66c7b1c1007c6a295b2","clientSecret":"4618d46562e28ae1d0a6527459c89cb4da10da7e","authPath":"/auth/github","callbackURL":"/auth/github/callback","successRedirect":"/","failureRedirect":"/"}}'
+
+
+composer-rest-server -c mauzi@medical-supply -n never -u true -d Y -w true -p 3001 -a true -m true
+
+
+composer-rest-server -c mauzi@medical-supply -n never -u true -d Y -w true -p 3002
+
+composer-rest-server -c manufacturer@medical-supply -n never -u true -d Y -w true -p 3005
