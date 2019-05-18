@@ -1,6 +1,21 @@
 /**
  * Sample access control list.
  */
+ rule CreateContract1 {
+	description: "only supplier should be able to create this contract"
+  	participant: "org.example.mynetwork.Supplier"
+  	operation: CREATE
+    resource: "org.example.mynetwork.Contract"
+  	action: ALLOW
+}
+rule candelete {
+	description: "user can delete contract only for which it is part of"
+  	participant(m): "org.example.mynetwork.Supplier"
+  	operation: DELETE
+    resource(v): "org.example.mynetwork.Contract"
+  	condition: (v.Supplier.getIdentifier() == m.getIdentifier())
+  	action: ALLOW
+}
 rule Default {
     description: "Allow all participants access to all resources"
     participant: "ANY"
